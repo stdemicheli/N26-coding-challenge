@@ -13,6 +13,7 @@ import Foundation
  */
 
 protocol APIProtocol {
+    var baseUrl: URL { get }
     var apiLoader: APILoaderProtocol { get }
     func loadCurrentRates(completion: @escaping (Response<CurrentRate>) -> ())
     func loadHistoricalRates(from startDate: String, to endDate: String, completion: @escaping (Response<HistoricalRates>) -> ())
