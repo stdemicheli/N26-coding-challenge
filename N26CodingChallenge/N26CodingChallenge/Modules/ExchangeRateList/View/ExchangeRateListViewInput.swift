@@ -6,8 +6,8 @@
 //  Copyright © 2019 De MicheliStefano. All rights reserved.
 //
 
-protocol ExchangeRateListInput: class {
-    var output: ExchangeRateListOutput! { get set }
+protocol ExchangeRateListViewInput: class {
+    var output: ExchangeRateListViewOutput! { get set }
     
     func setupInitialState()
     func showExchangeRateList()

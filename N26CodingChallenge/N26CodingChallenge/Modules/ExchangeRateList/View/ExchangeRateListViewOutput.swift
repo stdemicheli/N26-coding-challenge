@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ExchangeRateListOutput {
+protocol ExchangeRateListViewOutput {
     func didTriggerViewReadyEvent()
     func getNumberOfExchangeRates()
     func didDequeueCell(at indexPath: IndexPath, completion: @escaping () -> ())
