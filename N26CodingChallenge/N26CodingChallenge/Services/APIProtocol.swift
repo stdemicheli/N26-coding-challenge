@@ -14,8 +14,8 @@ import Foundation
 
 protocol APIProtocol {
     var apiLoader: APILoaderProtocol { get }
-    func loadCurrentRates() -> ()
-    func loadHistoricalRates(start: String, end: String) -> ()
+    func loadCurrentRates(completion: @escaping (Response<CurrentRate>) -> ())
+    func loadHistoricalRates(from startDate: String, to endDate: String, completion: @escaping (Response<HistoricalRates>) -> ())
 }
 
 /**
