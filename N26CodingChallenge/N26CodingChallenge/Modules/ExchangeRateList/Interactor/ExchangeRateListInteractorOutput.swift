@@ -6,6 +6,7 @@
 //  Copyright © 2019 De MicheliStefano. All rights reserved.
 //
 
-protocol ExchangeRateInteractorOutput {
+protocol ExchangeRateListInteractorOutput: class {
+    typealias RateViewModel = (rate: String, symbol: String)
     func updateExchangeRates()
 }
