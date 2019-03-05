@@ -10,5 +10,5 @@ import Foundation
 
 enum Response<Value> {
     case success(Value)
-    case error(Error)
+    case error(ExchangeRateError)
 }

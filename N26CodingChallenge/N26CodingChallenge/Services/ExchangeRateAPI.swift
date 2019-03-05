@@ -29,13 +29,13 @@ struct ExchangeRateAPI: APIProtocol {
     
     /// A network request for loading current rates.
     func loadCurrentRates(completion: @escaping (Response<CurrentRate>) -> ()) {
-        let url = self.url(pathComponents: ["posts"])
+        let url = self.url(pathComponents: ["currentprice"], pathExtension: "json")
         return fetch(with: url, completion: completion)
     }
     
     /// A network request for loading historical rates.
-    func loadHistoricalRates(from startDate: String, to endDate: String, completion: @escaping (Response<HistoricalRates>) -> ()) {
-        let url = self.url(pathComponents: ["comments"])
+    func loadHistoricalRates(completion: @escaping (Response<HistoricalRates>) -> ()) {
+        let url = self.url(pathComponents: ["historical", "close"], pathExtension: "json")
         return fetch(with: url, completion: completion)
     }
     
@@ -46,20 +46,23 @@ struct ExchangeRateAPI: APIProtocol {
             apiLoader.loadData(from: url) {data, res, error in
                 if let error = error {
                     NSLog("Error with FETCH urlRequest: \(error)")
-                    completion(Response.error(ExchangeRateError.Types.noConnection))
+                    let error = ExchangeRateError(type: .noConnection)
+                    completion(Response.error(error))
                     return
                 }
                 
                 guard let data = data else {
                     NSLog("No data returned")
-                    completion(Response.error(ExchangeRateError.Types.requestFailed))
+                    let error = ExchangeRateError(type: .requestFailed)
+                    completion(Response.error(error))
                     return
                 }
                 
                 if let httpResponse = res as? HTTPURLResponse {
                     if httpResponse.statusCode != 200 {
                         NSLog("An error code was returned from the http request: \(httpResponse.statusCode)")
-                        completion(Response.error(ExchangeRateError.Types.requestFailed))
+                        let error = ExchangeRateError(type: .requestFailed)
+                        completion(Response.error(error))
                         return
                     }
                 }
@@ -69,7 +72,8 @@ struct ExchangeRateAPI: APIProtocol {
                     completion(Response.success(resource))
                 } catch {
                     NSLog("Error decoding data: \(error)")
-                    completion(Response.error(ExchangeRateError.Types.decodingFailed))
+                    let error = ExchangeRateError(type: .decodingFailed)
+                    completion(Response.error(error))
                     return
                 }
             }.resume()

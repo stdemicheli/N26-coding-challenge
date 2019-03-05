@@ -11,4 +11,5 @@ protocol ExchangeRateListViewInput: class {
     
     func setupInitialState()
     func showExchangeRateList()
+    func showError(with message: String)
 }

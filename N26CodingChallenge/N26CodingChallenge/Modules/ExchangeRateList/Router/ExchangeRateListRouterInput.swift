@@ -6,4 +6,9 @@
 //  Copyright © 2019 De MicheliStefano. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol ExchangeRateListRouterInput: class {
+    var viewController: ExchangeRateListViewController! { get set }
+    func presentDetails()
+}

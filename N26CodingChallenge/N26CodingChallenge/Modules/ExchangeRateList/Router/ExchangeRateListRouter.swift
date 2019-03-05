@@ -7,3 +7,16 @@
 //
 
 import Foundation
+import UIKit
+
+class ExchangeRateListRouter: ExchangeRateListRouterInput {
+    
+    var viewController: ExchangeRateListViewController!
+    
+    func presentDetails() {
+        let detailModuleBuilder = ExchangeRateDetailModuleBuilder()
+        let detailViewController = detailModuleBuilder.build()
+        viewController.navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+}

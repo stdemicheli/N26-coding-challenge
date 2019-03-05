@@ -21,22 +21,22 @@ class ExchangeRateListInteractor: ExchangeRateListInteractorInput {
         dataLoader.loadCurrentRate { [weak self] (response) in
             switch response {
             case .success(let currentRate):
-                let rate = (rate: String(currentRate.exchangeRates.first?.value.rate ?? 0.0), symbol: currentRate.exchangeRates.first?.value.symbol ?? "")
+                let rate = (rate: String(currentRate.rates.first?.value.rate ?? 0.0), symbol: currentRate.rates.first?.value.symbol ?? "")
                 self?.rates.append(rate)
             case .error(let error):
-                print(error)
+                self?.output.handleError(with: error)
             }
             dispatchGroup.leave()
         }
         
         dispatchGroup.enter()
-        dataLoader.loadHistoricalRates(from: "", to: "") { [weak self] (response) in
+        dataLoader.loadHistoricalRates() { [weak self] (response) in
             switch response {
             case .success(let historicalRate):
-                let rates = historicalRate.rates.values.map { (rate: String($0), symbol: "EUR") }
+                let rates = historicalRate.rates.values.map { (rate: String($0), symbol: "USD") }
                 self?.rates.append(contentsOf: rates)
             case .error(let error):
-                print(error)
+                self?.output.handleError(with: error)
             }
             dispatchGroup.leave()
         }

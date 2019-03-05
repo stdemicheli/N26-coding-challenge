@@ -14,10 +14,10 @@ import Foundation
 
 struct CurrentRate: Codable {
     
-    let exchangeRates: [FiatCurrencyTypes.RawValue: ExchangeRate]
+    let rates: [FiatCurrencyTypes.RawValue: ExchangeRate]
     
     enum CodingKeys: String, CodingKey {
-        case exchangeRates
+        case rates = "bpi"
     }
     
     struct ExchangeRate: Codable {
@@ -38,10 +38,10 @@ struct CurrentRate: Codable {
 
 struct HistoricalRates: Codable {
     
-    let rates: [Date: Float]
+    let rates: [String: Float]
     
     enum CodingKeys: String, CodingKey {
-        case rates
+        case rates = "bpi"
     }
     
 }

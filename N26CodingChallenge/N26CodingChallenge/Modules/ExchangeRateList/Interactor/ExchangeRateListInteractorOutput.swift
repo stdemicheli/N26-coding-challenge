@@ -9,4 +9,5 @@
 protocol ExchangeRateListInteractorOutput: class {
     typealias RateViewModel = (rate: String, symbol: String)
     func updateExchangeRates()
+    func handleError(with error: ExchangeRateError)
 }

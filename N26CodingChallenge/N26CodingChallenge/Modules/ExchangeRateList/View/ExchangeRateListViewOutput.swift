@@ -10,7 +10,7 @@ import Foundation
 
 protocol ExchangeRateListViewOutput {
     func didTriggerViewReadyEvent()
-    func getNumberOfExchangeRates()
-    func didDequeueCell(at indexPath: IndexPath, completion: @escaping () -> ())
+    func getNumberOfExchangeRates() -> Int
+    func didDequeueCell(at indexPath: IndexPath, completion: @escaping ((rate: String, symbol: String)) -> ())
     func didSelectExchangeRate(at indexPath: IndexPath)
 }

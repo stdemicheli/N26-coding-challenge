@@ -6,4 +6,8 @@
 //  Copyright © 2019 De MicheliStefano. All rights reserved.
 //
 
-import Foundation
+protocol DetailsModuleInput: class {
+    var view: ExchangeRateListViewInput! { get set }
+    var interactor: ExchangeRateListInteractorInput! { get set }
+    var router: ExchangeRateListRouterInput! { get set }
+}

@@ -33,8 +33,8 @@ class ExchangeRateLoader: LoaderProtocol {
         }
     }
     
-    func loadHistoricalRates(from startDate: String, to endDate: String, completion: @escaping (Response<HistoricalRates>) -> ()) {
-        api.loadHistoricalRates(from: startDate, to: endDate) { (response) in
+    func loadHistoricalRates(completion: @escaping (Response<HistoricalRates>) -> ()) {
+        api.loadHistoricalRates() { (response) in
             completion(response)
         }
     }
